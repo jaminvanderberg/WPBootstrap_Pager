@@ -67,12 +67,11 @@ $defaults = array(
 
 ### Parameters
 
-The `$args` parameter is not required.  If omitted, a default Bootstrap pagination element
-will be created.
+* The `$args` parameter is not required.  If omitted, a default Bootstrap pagination element will be created.
 
 #### before
 
-(string) Text to put before all the links. Defaults to `<ul class="pagination">`.
+* (string) Text to put before all the links. Defaults to `<ul class="pagination">`.
 
 #### after 
 
@@ -101,9 +100,12 @@ will be created.
 
 (string) Text for link to previous page. Defaults to `&laquo;` (&laquo;)
 
-pagelink 
+#### pagelink
+
 (string) Format string for page numbers.  % in the string will be replaced with the number, so Page % would generate "Page 1", "Page 2", etc. Defaults to %.
-echo 
+
+#### echo
+
 (boolean) Toggles whether to echo or return the result. The default is true. Valid values:
 1 (True) - Default
 0 (False)
