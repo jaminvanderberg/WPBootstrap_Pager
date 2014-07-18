@@ -16,6 +16,12 @@ This implementation is left as open-ended as possible.  There are no hard-coded 
 Usage
 -----
 
+First, include class-wpbootstrap-pager.php in your template's functions.php file:
+
+```php
+require_once 'class-wpbootstrap-pager.php';
+```
+
 ### Post-Type Pager
 
 In a WordPress post or page template (like single.php), the following code would be placed __inside__ the loop:
