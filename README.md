@@ -67,7 +67,7 @@ $defaults = array(
 
 ### Parameters
 
-* The `$args` parameter is not required.  If omitted, a default Bootstrap pagination element will be created.
+The `$args` parameter is not required.  If omitted, a default Bootstrap pagination element will be created.
 
 #### before
 
@@ -75,22 +75,21 @@ $defaults = array(
 
 #### after 
 
-(string) Text to put after all the links. Defaults to `</ul>`.
+* (string) Text to put after all the links. Defaults to `</ul>`.
 
 #### link_before
 
-(string) Text that goes before the text of the link. Defaults to `<li>`.
+* (string) Text that goes before the text of the link. Defaults to `<li>`.
 
 #### link_after 
 
-(string) Text that goes after the text of the link. Defaults to `</li>`.
+* (string) Text that goes after the text of the link. Defaults to `</li>`.
 
 #### next_or_number 
 
-(string) Indicates whether page numbers should be used. Valid values are:
-
-* `number` (Default) - Display page numbers.
-* `next` - Display previous/next links only.
+* (string) Indicates whether page numbers should be used. Valid values are:
+    * `number` (Default) - Display page numbers.
+    * `next` - Display previous/next links only.
 
 #### nextpagelink 
 
