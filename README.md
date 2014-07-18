@@ -34,6 +34,6 @@ $defaults = array(
 
 ### Parameters
 
-##### before
+#### before
 
 * (string) Text to put before all the links. Defaults to `<ul class="pagination">`.
