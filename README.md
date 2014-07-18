@@ -8,10 +8,10 @@ Usage
 
 ### Post-Type Pager
 
-In a WordPress post or page template (like single.php), the following code would be placed _inside_ the loop:
+In a WordPress post or page template (like single.php), the following code would be placed __inside__ the loop:
 
 ```php
-wpbootstrap_post_pager( $args );
+<?php wpbootstrap_post_pager( $args ); ?>
 ```
 
 This will create a pagination element for paging through multiple pages in a single post.
@@ -22,7 +22,7 @@ and is called in a similar manner (with additional arguments that provide extra 
 ### Archive-Type Pager
     
 In a WordPress archive-type template (archive.php, category.php, tag.php, etc.), the following code would
-be placed _before or after_ the loop:
+be placed __before or after__ the loop:
 
 ```php
 <?php wpbootstrap_archive_pager( $args ); ?>
@@ -51,7 +51,7 @@ $defaults = array(
 	'echo'             => true,
 	'current_before'   => '<li class="active">',
 	'current_after'    => '</li>',
-	'currentlink'      => '% <span class="sr-only">'. __('(current)') . '</span>',
+	'currentlink'      => '% <span class="sr-only">'. __( '(current)', 'wp_bootstap_pager' ) . '</span>',
 	'disabled_before'  => '<li class="disabled">',
 	'disabled_after'   => '</li>',
 	'previous_before'  => '<li class="previous">',
@@ -67,9 +67,46 @@ $defaults = array(
 
 ### Parameters
 
+The `$args` parameter is not required.  If omitted, a default Bootstrap pagination element
+will be created.
+
 #### before
 
-* (string) Text to put before all the links. Defaults to `<ul class="pagination">`.
+(string) Text to put before all the links. Defaults to `<ul class="pagination">`.
+
+#### after 
+
+(string) Text to put after all the links. Defaults to `</ul>`.
+
+#### link_before
+
+(string) Text that goes before the text of the link. Defaults to `<li>`.
+
+#### link_after 
+
+(string) Text that goes after the text of the link. Defaults to `</li>`.
+
+#### next_or_number 
+
+(string) Indicates whether page numbers should be used. Valid values are:
+
+* `number` (Default) - Display page numbers.
+* `next` - Display previous/next links only.
+
+#### nextpagelink 
+
+(string) Text for link to next page. Defaults to `&raquo;` (&raquo;)
+
+#### previouspagelink
+
+(string) Text for link to previous page. Defaults to `&laquo;` (&laquo;)
+
+pagelink 
+(string) Format string for page numbers.  % in the string will be replaced with the number, so Page % would generate "Page 1", "Page 2", etc. Defaults to %.
+echo 
+(boolean) Toggles whether to echo or return the result. The default is true. Valid values:
+1 (True) - Default
+0 (False)
 
 
 	/**
