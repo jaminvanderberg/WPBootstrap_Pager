@@ -1,7 +1,17 @@
 WPBootstrap_Pager
 =================
 
-Fully-Featured, customizable class for creating Bootstrap-style pagination links for many page types in WordPress
+Fully-Featured, customizable class for creating Bootstrap-style pagination links for many page types in WordPress.
+
+The WPBootstrap_Pager class provides a consistent interface for creating Bootstrap-style pagination elements
+across several WordPress page types.
+
+It was originally designed as a rewrite of [wp_link_pages()](http://codex.wordpress.org/Function_Reference/wp_link_pages) to allow for additional styling,
+but has since been expanded to offer the same interface for archive-type pages (similar to what
+[paginate_links()](http://codex.wordpress.org/Function_Reference/paginate_links) does).  I have tried
+to keep the arguments consistent with the arguments used in the WordPress function calls.
+
+This implementation is left as open-ended as possible.  There are no hard-coded tags, except for anchors (`<a>` tags), which are still created by WordPress.  All other HTML tags are provided through arguments, so there might be uses for this class beyond Bootstrap.  The default arguments, however, are designed to work with Bootstrap with little or no customization required.
 
 Usage
 -----
@@ -93,89 +103,75 @@ The `$args` parameter is not required.  If omitted, a default Bootstrap paginati
 
 #### nextpagelink 
 
-(string) Text for link to next page. Defaults to `&raquo;` (&raquo;)
+* (string) Text for link to next page. Defaults to `&raquo;` (&raquo;)
 
 #### previouspagelink
 
-(string) Text for link to previous page. Defaults to `&laquo;` (&laquo;)
+* (string) Text for link to previous page. Defaults to `&laquo;` (&laquo;)
 
 #### pagelink
 
-(string) Format string for page numbers.  % in the string will be replaced with the number, so Page % would generate "Page 1", "Page 2", etc. Defaults to %.
+* (string) Format string for page numbers.  % in the string will be replaced with the number, so Page % would generate "Page 1", "Page 2", etc. Defaults to `%`.
 
 #### echo
 
-(boolean) Toggles whether to echo or return the result. The default is true. Valid values:
-1 (True) - Default
-0 (False)
+* (boolean) Toggles whether to echo or return the result. The default is `true`. Valid values:
+    * 1 (True) - Default
+    * 0 (False)
+
+#### current_before
+
+* (string) Text that goes before link for the current page only. Defaults to `<li class="active">`.  This default
+
+#### current_after
+
+* (string) Text that goes after link for the current page only. Defaults to `</li>`.
+
+#### currentlink
+
+* (string) Format string for current page number only.  % in the string will be replaced with the number. Defaults to `% <span class="sr-only">(current)</span>`.
+
+#### disabled_before
+
+* (string) Text that goes before the disabled links.  When `next_or_number = 'number'`, the previous and next links are disabled on the first and last page, respectively.  Applies only to this scenario.  Defaults to `<li class="disabled">`.
+
+#### disabled_after
+
+* (string) Text that goes after the disabled links.  When `next_or_number = 'number'`, the previous and next links are disabled on the first and last page, respectively.  Applies only to this scenario.  Defaults to `</li>`.
+
+#### previous_before
+
+* (string) Used only when `next_or_number = 'next'`.  Text that goes before the previous page link.  Defaults to `<li class="previous">`.  This default class causes the previous page link to left align.
+
+#### previous_after
+
+* (string) Used only when `next_or_number = 'next'`.  Text that goes after the previous page link.  Defaults to `</li>`.
+
+#### next_before
+
+* (string) Used only when `next_or_number = 'next'`.  Text that goes before the next page link.  Defaults to `<li class="next">`.  This default class causes the next page link to right align.
+
+#### next_after
+
+* (string) Used only when `next_or_number = 'next'`.  Text that goes after the next page link.  Defaults to `</li>`.
 
 
-	/**
-	 * Override wp_link_pages to allow for Bootstrap classes
-	 * 
-	 * This is a modified version of wp_link_pages, designed to suit Bootstrap
-	 * pagination better.  It is fully customizable, and includes options to 
-	 * style the current and disabled elements for a `pagination` component,
-	 * and the previous and next elements for a `pager` component.
-	 * 
-	 * This implementation is left open-ended, with no hard-coded tags.  All
-	 * tags are provided through the arguments, therefore there might be other 
-	 * implementations of this function beyond Bootstrap.  The default arguments,
-	 * however, are designed to work with Bootstrap with little or no customization.
-	 * 
-	 * To center the pagination, call this function from inside a 
-	 * `<div class="text-center">` block.
-	 *
-	 * Arguments not included in wp_link_pages:
-	 * 
-	 * * current_before - As `link_before`, but used only on the current page. (Default: '<li class="active">').
-	 * * current_after - As `link_after`, but used only on the current page. (Default: '</li>').
-	 * * currentlink - As `pagelink`, but used only on the current page. (Default: '% <span class="sr-only">' . __('(current)') . '</span>').
-	 * * disabled_before - As `link_before`, but used only on disabled next/previous links. (Default: '<li class="disabled">').
-	 * * disabled_after - As `link_after`, but used only on disabled next/previous links. (Default: '</li>').
-	 * * previous_before - As `link_before`, but used only on previous link when `next_or_number` = 'next'. (Default: '<li class="previous">').
-	 * * previous_after - As `link_after`, but used only on previous link when `next_or_number` = 'next'. (Default: '</li>').
-	 * * next_before - As `link_before`, but used only on next link when `next_or_number` = 'next'. (Default: '<li class="next">').
-	 * * next_after - As `link_after`, but used only on next link when `next_or_number` = 'next'. (Default: '</li>').
-	 * 
-	 * Additionally, many of the other arguments have default values that
-	 * better suit a bootstrap implementation:
-	 * 
-	 * * before = '<ul class="pagination">
-	 * * after = '</ul>'
-	 * * link_before = '<li>'
-	 * * link_after = '</li>'
-	 * * previouspagelink = '&laquo;'
-	 * * nextpagelink = '&raquo;'
-	 * 
-	 * And the remaining arguments retain their normal defaults from wp_link_pages:
-	 * 
-	 * * next_or_number = 'number'
-	 * * pagelink = '%'
-	 * * echo = 1
-	 * 
-	 * A few arguments from paginate_links() were also used:
-	 * 
-	 * * show_all = false
-	 * * end_size = 1
-	 * * mid_size = 2
-	 * 
-	 * These default settings will cause a maximum of 7 page links to be displayed.
-	 * That is: the first and last pages (`end_size = 1` times two for each end),
-	 * two pages on each side of the current (`mid_size = 2` times two for each side),
-	 * plus the current page.  This is to prevent the pager from becomming too large.
-	 * These arguments apply to both post- and archive-type pages, but do not
-	 * apply if `next_or_number = 'next'`.
-	 * 
-	 * In most cases, this function can be used without arguments, however,
-	 * if using the argument `next_or_number` = 'next', the following arguments
-	 * are recommended:
-	 * 
-	 * * next_or_number = 'next'
-	 * * before = '<ul class="pager">'
-	 * * previouspagelink = __('Previous')
-	 * * nextpagelink = __('Next')
-	 * 
-	 * @param array $args
-	 * @return string Page links output
-	 */
+#### show_all
+
+* (boolean) If set to `true`, then it will show all of the pages instead of a short list of the pages near the current page. By default, `show_all` is set to `false` to prevent the pagination element from becoming too large.  When `show_all = false`, the size of the pager is controlled by the `end_size` and `mid_size` arguments.  Defaults to `false`.
+
+#### end_size
+
+* (integer) Used only when `showall = false`.  Number of pages displayed on either the start and the end list edges.  Defaults to `1`.
+
+#### mid_size
+
+* (integer) Used only when `showall = false`.  Number of pages displayer to either side of current page, but not including current page.  Defaults to 2.
+
+#### hellip
+
+* (string) Text to replace omitted page numbers with, usually some form of ellipses (&hellip;).  Defaults to `<li class="disabled"><a>&hellip;</a></li>`.
+
+
+### Exmaple Usage:
+
