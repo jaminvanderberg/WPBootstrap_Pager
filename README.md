@@ -179,5 +179,132 @@ The `$args` parameter is not required.  If omitted, a default Bootstrap paginati
 * (string) Text to replace omitted page numbers with, usually some form of ellipses (&hellip;).  Defaults to `<li class="disabled"><a>&hellip;</a></li>`.
 
 
-### Exmaple Usage:
+### Example Usage
 
+#### Default Post-Type Pagination
+
+```php
+<?php
+if ( have_posts() ) {
+  while ( have_posts() {
+     the_post();
+     //
+     // Post content here
+     //
+     ?>
+     
+     <div class="text-center"><?php wpbootstrap_post_pager( ); ?></div>
+     
+     <?php
+  }
+}
+```
+
+Use `<div class="text-center">` to center the pagination element on the page.
+
+@todo: Add Image
+
+#### Default Archive-Type Pagination
+
+```php
+<?php
+if ( have_posts() ) {
+  while ( have_posts() {
+     the_post();
+     //
+     // Post content here
+     //
+  }
+}
+?>
+<div class="text-center"><?php wpbootstrap_archive_pager( ); ?></div>
+```
+
+@todo: Add Image
+
+#### Next/Previous Post-Type Pager
+
+```php
+<?php
+if ( have_posts() ) {
+  while ( have_posts() {
+     the_post();
+     //
+     // Post content here
+     //
+
+     $args = array(
+	'next_or_number'   => 'next',
+	'before'           => '<ul class="pager">',
+	'previouspagelink' => __( 'Previous Page', 'text-domain' ),
+	'nextpagelink'     => __( 'Next Page', 'text-domain' ),
+     );
+     
+     wpbootstrap_post_pager( $args );
+  }
+}
+```
+
+This pager element does not need to be centered, as the default `previous_before` and `previous_after` arguments will right- and left-align the buttons automatically.
+
+@todo: Add Image
+
+#### Older/Newer Archive-Type Pager
+
+```php
+<?php
+if ( have_posts() ) {
+  while ( have_posts() {
+     the_post();
+     //
+     // Post content here
+     //
+  }
+}
+
+$args = array(
+  'next_or_number'   => 'next',
+  'before'           => '<ul class="pager">',
+  'previouspagelink' => __( 'Newer Posts', 'text-domain' ),
+  'nextpagelink'     => __( 'Older Posts', 'text-domain' ),
+);
+     
+wpbootstrap_archive_pager( $args );
+
+```
+
+Note that archives are in reverse chronological, so the previous page contains newer posts and the next page contains older posts.
+
+@todo: Add Image
+
+#### Centered Previous/Next Pager
+
+```php
+<?php
+if ( have_posts() ) {
+  while ( have_posts() {
+     the_post();
+     //
+     // Post content here
+     //
+
+     $args = array(
+	'next_or_number'   => 'next',
+	'before'           => '<ul class="pager">',
+	'previouspagelink' => __( 'Previous Page', 'text-domain' ),
+	'nextpagelink'     => __( 'Next Page', 'text-domain' ),
+	'previous_before'  => '<li>',
+	'next_before'      => '<li>',
+     );
+     ?>
+     
+     <div class="text-center"><?php wpbootstrap_post_pager( $args ); ?></div>
+     
+     <?php
+  }
+}
+```
+
+Remove the classes from the `previous_before` and `next_before` arguments to prevent them from left- and right-aligning.
+
+@todo: Add Image
