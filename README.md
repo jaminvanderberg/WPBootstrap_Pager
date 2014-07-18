@@ -6,19 +6,29 @@ Fully-Featured, customizable class for creating Bootstrap-style pagination links
 Usage
 -----
 
+### Post-Type Pager
+
 In a WordPress post or page template (like single.php), the following code would be placed _inside_ the loop:
 
-    <?php wpbootstrap_post_pager( $args ); ?>
-    
+```php
+wpbootstrap_post_pager( $args );
+```
+
+This will create a pagination element for paging through multiple pages in a single post.
+
 This usage is a replacement for calls to [wp_link_pages()](http://codex.wordpress.org/Function_Reference/wp_link_pages),
 and is called in a similar manner (with additional arguments that provide extra customization).
 
-----
+### Archive-Type Pager
     
 In a WordPress archive-type template (archive.php, category.php, tag.php, etc.), the following code would
 be placed _before or after_ the loop:
 
-    <?php wpbootstrap_archive_pager( $args ); ?>
+```php
+<?php wpbootstrap_archive_pager( $args ); ?>
+```
+
+This will create a pagination element for paging through multiple pages of posts.
     
 This usage is a replacement for calls to [paginate_links()](http://codex.wordpress.org/Function_Reference/paginate_links),
 although it is called with a different set of arguments that is more similar to those from
