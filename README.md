@@ -6,6 +6,8 @@ Fully-Featured, customizable class for creating Bootstrap-style pagination links
 The WPBootstrap_Pager class provides a consistent interface for creating Bootstrap-style pagination elements
 across several WordPress page types.
 
+![example_pagination](https://cloud.githubusercontent.com/assets/8201912/3633768/0eb610f2-0ef8-11e4-9b76-42705a7729e3.PNG)
+
 It was originally designed as a rewrite of [wp_link_pages()](http://codex.wordpress.org/Function_Reference/wp_link_pages) to allow for additional styling,
 but has since been expanded to offer the same interface for archive-type pages (similar to what
 [paginate_links()](http://codex.wordpress.org/Function_Reference/paginate_links) does).  I have tried
