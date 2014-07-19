@@ -180,6 +180,7 @@ The `$args` parameter is not required.  If omitted, a default Bootstrap paginati
 
 
 ### Example Usage
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
 #### Default Post-Type Pagination
 
@@ -202,7 +203,7 @@ if ( have_posts() ) {
 
 Use `<div class="text-center">` to center the pagination element on the page.
 
-@todo: Add Image
+<div class="text-center"><ul class="pagination"><li class="disabled"><a href="#">&laquo;</a></li><li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">&raquo;</a></li></ul></div>
 
 #### Default Archive-Type Pagination
 
@@ -220,7 +221,7 @@ if ( have_posts() ) {
 <div class="text-center"><?php wpbootstrap_archive_pager( ); ?></div>
 ```
 
-@todo: Add Image
+![archive-type](https://cloud.githubusercontent.com/assets/8201912/3633601/0e08304e-0eea-11e4-92a2-b024893491b4.PNG)
 
 #### Next/Previous Post-Type Pager
 
@@ -247,7 +248,7 @@ if ( have_posts() ) {
 
 This pager element does not need to be centered, as the default `previous_before` and `previous_after` arguments will right- and left-align the buttons automatically.
 
-@todo: Add Image
+![prev-next](https://cloud.githubusercontent.com/assets/8201912/3633605/913d6dbc-0eea-11e4-9f49-324ef307ac70.PNG)
 
 #### Older/Newer Archive-Type Pager
 
@@ -270,12 +271,11 @@ $args = array(
 );
      
 wpbootstrap_archive_pager( $args );
-
 ```
 
 Note that archives are in reverse chronological, so the previous page contains newer posts and the next page contains older posts.
 
-@todo: Add Image
+![newer-older](https://cloud.githubusercontent.com/assets/8201912/3633620/366267ca-0eeb-11e4-880b-7ab22ca38ace.PNG)
 
 #### Centered Previous/Next Pager
 
@@ -294,6 +294,7 @@ if ( have_posts() ) {
 	'previouspagelink' => __( 'Previous Page', 'text-domain' ),
 	'nextpagelink'     => __( 'Next Page', 'text-domain' ),
 	'previous_before'  => '<li>',
+	'previous_after'   => '</li> ',
 	'next_before'      => '<li>',
      );
      ?>
@@ -305,6 +306,13 @@ if ( have_posts() ) {
 }
 ```
 
-Remove the classes from the `previous_before` and `next_before` arguments to prevent them from left- and right-aligning.
+Remove the classes from the `previous_before` and `next_before` arguments to prevent them from left- and right-aligning.  Also, a space is added to the end of `previous_after` to keep the two elements from touching.
 
-@todo: Add Image
+![centered-prev-next](https://cloud.githubusercontent.com/assets/8201912/3633692/f50ea670-0ef0-11e4-8568-b413e856e6b2.PNG)
+
+#### Pagination Size
+
+The default behavior is to omit pages from large pagination elements, based on the `end_size` and `mid_size` arguments:
+
+![large-pagination](https://cloud.githubusercontent.com/assets/8201912/3633705/b3b85368-0ef2-11e4-8910-37441e25cb49.PNG)
+
