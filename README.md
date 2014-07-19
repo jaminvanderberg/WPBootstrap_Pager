@@ -16,7 +16,13 @@ This implementation is left as open-ended as possible.  There are no hard-coded 
 Usage
 -----
 
-First, include class-wpbootstrap-pager.php in your template's functions.php file:
+Make sure to enqueue the Boostrap css in your template's funciton.php file (usually in your scripts function):
+
+```php
+wp_enqueue_style( 'bootstrap-core', get_template_directory_uri() . '/css/bootstrap.min.css');
+```
+
+In the same fuctions.php (usually in your theme setup function), make sure to include class-wpbootstrap-pager.php:
 
 ```php
 require_once 'class-wpbootstrap-pager.php';
@@ -203,7 +209,7 @@ if ( have_posts() ) {
 
 Use `<div class="text-center">` to center the pagination element on the page.
 
-<div class="text-center"><ul class="pagination"><li class="disabled"><a href="#">&laquo;</a></li><li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">&raquo;</a></li></ul></div>
+![post-type-pagination](https://cloud.githubusercontent.com/assets/8201912/3633725/abf1769e-0ef4-11e4-972d-c52dc785cc73.PNG)
 
 #### Default Archive-Type Pagination
 
@@ -221,7 +227,7 @@ if ( have_posts() ) {
 <div class="text-center"><?php wpbootstrap_archive_pager( ); ?></div>
 ```
 
-![archive-type](https://cloud.githubusercontent.com/assets/8201912/3633601/0e08304e-0eea-11e4-92a2-b024893491b4.PNG)
+![archive-type-pagination](https://cloud.githubusercontent.com/assets/8201912/3633728/fde919d4-0ef4-11e4-87d7-ab8076ad4a3d.PNG)
 
 #### Next/Previous Post-Type Pager
 
@@ -308,11 +314,39 @@ if ( have_posts() ) {
 
 Remove the classes from the `previous_before` and `next_before` arguments to prevent them from left- and right-aligning.  Also, a space is added to the end of `previous_after` to keep the two elements from touching.
 
-![centered-prev-next](https://cloud.githubusercontent.com/assets/8201912/3633692/f50ea670-0ef0-11e4-8568-b413e856e6b2.PNG)
+![centered-prev-next](https://cloud.githubusercontent.com/assets/8201912/3633732/49af3844-0ef5-11e4-89bf-506d3eba10a5.PNG)
 
 #### Pagination Size
 
 The default behavior is to omit pages from large pagination elements, based on the `end_size` and `mid_size` arguments:
 
-![large-pagination](https://cloud.githubusercontent.com/assets/8201912/3633705/b3b85368-0ef2-11e4-8910-37441e25cb49.PNG)
+![large-pagination](https://cloud.githubusercontent.com/assets/8201912/3633733/971bef14-0ef5-11e4-90b7-bf16fd79ca18.PNG)
 
+You can disable this behavior by setting the `show_all` argument to `true`:
+
+```php
+<?php
+$args = array(
+  'show_all' => true
+);
+?>
+<div class="text-center"><?php wpbootstrap_archive_pager( $args ); ?></div>
+```
+
+This may result in a rather large pagination element:
+
+![show-all](https://cloud.githubusercontent.com/assets/8201912/3633741/54c49f98-0ef6-11e4-9f3b-8f1f70f0089d.PNG)
+
+Alternatively, you can tweak the `end_size` and `mid_size` parameters to meet your needs:
+
+```php
+<?php
+$args = array(
+  'end_size' => 4,
+  'mid_size' => 2,
+);
+?>
+<div class="text-center"><?php wpbootstrap_archive_pager( $args ); ?></div>
+```
+
+![pagination-tweaks](https://cloud.githubusercontent.com/assets/8201912/3633751/d4862da0-0ef6-11e4-969d-41e97412459f.PNG)
