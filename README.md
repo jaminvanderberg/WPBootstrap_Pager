@@ -256,7 +256,7 @@ if ( have_posts() ) {
 
 This pager element does not need to be centered, as the default `previous_before` and `previous_after` arguments will right- and left-align the buttons automatically.
 
-![prev-next](https://cloud.githubusercontent.com/assets/8201912/3633605/913d6dbc-0eea-11e4-9f49-324ef307ac70.PNG)
+![prev-next](https://cloud.githubusercontent.com/assets/8201912/3633777/81c2b3ca-0ef8-11e4-896c-0ab8e8c51363.PNG)
 
 #### Older/Newer Archive-Type Pager
 
